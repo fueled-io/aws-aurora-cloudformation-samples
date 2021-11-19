@@ -185,7 +185,7 @@ Mappings:
     sa-east-1:
       AMZNLINUXHVM: ami-03e1e4abf50e14ded
     us-east-1:
-      AMZNLINUXHVM: ami-0915e09cc7ceee3ab
+      AMZNLINUXHVM: ami-087c17d1fe0178315
     us-gov-west-1:
       AMZNLINUXHVM: ami-f5e4d294
     us-gov-east-1:
@@ -349,10 +349,10 @@ Resources:
     CreationPolicy:
       ResourceSignal:
         Count: 1
-        Timeout: PT30M
+        Timeout: PT10M
     UpdatePolicy:
       AutoScalingRollingUpdate:
-        PauseTime: PT30M
+        PauseTime: PT10M
         SuspendProcesses:
           - HealthCheck
           - ReplaceUnhealthy
@@ -406,7 +406,7 @@ Resources:
                     - !Sub 's3://aws-quickstart-${AWS::Region}/quickstart-linux-bastion/scripts/banner_message.txt'
                     - !Ref BastionBanner
             c-restartsshd:
-              command: /etc/init.d/sshd restart
+              command: systemctl restart sshd
             d-yumupdate:
               command: yum update -y
     Properties:
